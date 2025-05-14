@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: first-dep-k8
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: node-app
+          image: keicee32/nodejs-app
+          #livenessProbe:
+      nodeSelector:
+        role: 'worker'

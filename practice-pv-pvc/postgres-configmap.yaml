@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pg-configmap
+data:
+  password: 'yourpassword'
+  username: 'fileprocessor'

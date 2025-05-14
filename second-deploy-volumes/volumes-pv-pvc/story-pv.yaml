@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-story
+spec:
+  capacity:
+    storage: 2Gi
+  volumeMode: Filesystem
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+      #ReadWriteMany
+      #ReadOnlyMany
+  hostPath:
+    path: /home/keicee/data
+    type: DirectoryOrCreate
+
+
+
+
+#In every PersistentVolume, there should be capacity key, an accessMode, volumeMode

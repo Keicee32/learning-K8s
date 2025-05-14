@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pg
+  template:
+    metadata:
+      labels:
+        app: pg
+    spec:
+      containers:
+        - name: postgres
+          image: postgres
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: pg-configmap
+                  key: pasword
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: pg-configmap
+                  key: username
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: pg-volumes
+      volumes:
+        - name: pg-volumes
+          persistentVolumeClaim:
+            claimName: pg-pvc

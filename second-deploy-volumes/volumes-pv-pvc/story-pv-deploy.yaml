@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pv
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: story-pv
+  template:
+    metadata:
+      labels:
+        app: story-pv
+    spec:
+      containers:
+        - name: story-app
+          image: keicee32/story-app-volumes
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: /app/story
+              name: story-volume
+      volumes:
+        - name: story-volume
+          persistentVolumeClaim:
+            claimName: pvc-story
