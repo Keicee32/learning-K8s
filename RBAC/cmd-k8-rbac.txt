@@ -1,0 +1,100 @@
+ 1957  ls
+ 1958  cat first-deployment/first-dep-k8.yml 
+ 1959  kubectl apply -f first-deployment/first-dep-k8.yml 
+ 1960  kubectl rollout status deploy first-dep-k8 
+ 1961  kubectl get pods
+ 1962  kubectl describe pod first-dep-k8-696cb588c-8n7kf 
+ 1963  cat first-deployment/first-dep-k8.yml 
+ 1964  kubectl delete deployments.apps first-dep-k8 
+ 1965  ls
+ 1966  cat practice-pv-pvc/postgres-deploy.yml 
+ 1967  ls
+ 1968  cat second-deploy-volumes/story-deploy.yaml 
+ 1969  kubectl apply -f second-deploy-volumes/story-deploy.yaml 
+ 1970  kubectl rollout status deploy story-app 
+ 1971  kubectl get pods -o wide
+ 1972  kubectl describe pod story-app-fcc65bb68-r5jx8 
+ 1973  kubectl rollout status deployment story-app 
+ 1974  kubectl rollout history deployment story-app 
+ 1975  cd
+ 1976  ls
+ 1977  cd dufuna/
+ 1978  ls
+ 1979  cd fileextractionbackend/
+ 1980  ls
+ 1981  sudo vi Dockerfile-pukka
+ 1982  docker build -f Dockerfile-pukka -t keicee32/interprais-pukka .
+ 1983  nmap localhost
+ 1984  docker images
+ 1985  ls -al
+ 1986  docker image ls
+ 1987  docker rmi 5f6
+ 1988  docker ps -a
+ 1989  docker images
+ 1990  docker rmi b00 796 2cd abe bea
+ 1991  docker ps -a
+ 1992  docker rm distroless 
+ 1993  docker rmi b00 796 2cd abe bea
+ 1994  minikube status
+ 1995  minikube start
+ 1996  docker ps -a
+ 1997  docker system prune -a
+ 1998  docker images
+ 1999  cd
+ 2000  cd multi-node-k8s/
+ 2001  ll
+ 2002  mkdir RBAC
+ 2003  cd RBAC/
+ 2004  kubectl create namespace lfs158
+ 2005  minkube start
+ 2006  minikube start
+ 2007  touch cmd-k8-rbac.txt
+ 2008  history
+ 2009  history | tail
+ 2010  history | tail >> cmd-k8-rbac.txt 
+ 2011  cat cmd-k8-rbac.txt 
+ 2012  sudo useradd -s /bin/bash bob
+ 2013  sudo passwd bob
+ 2014  openssl genrsa -out bob.key 2048
+ 2015  ll
+ 2016  openssl req -new -key bob.key   -out bob.csr -subj "/CN=bob/O=learner"
+ 2017  sudo nano signing-request.yml
+ 2018  cat bob.csr | base64 | tr -d '\n','%'
+ 2019  sudo nano signing-request.yml
+ 2020  cat signing-request.yml 
+ 2021  kubectl create -f signing-request.yaml
+ 2022  ls
+ 2023  kubectl create -f signing-request.yml
+ 2024  kubectl get csr
+ 2025  kubectl certificate approve bob-csr
+ 2026  kubectl get csr
+ 2027  history | tail
+ 2028  history | less
+ 2029  history | tail -n 50
+ 2030  history | tail -n 30
+ 2031  kubectl get csr bob-csr   -o jsonpath='{.status.certificate}' |   base64 -d > bob.crt
+ 2032  cat bob.crt
+ 2033  kubectl config set-credentials bob   --client-certificate=bob.crt --client-key=bob.key
+ 2034  kubectl config set-context bob-context   --cluster=minikube --namespace=lfs158 --user=bob
+ 2035  kubectl config view
+ 2036  kubectl -n lfs158 create deployment nginx --image=nginx:alpine
+ 2037  kubectl get ns
+ 2038  history | tail -n 50
+ 2039  ls
+ 2040  kubectl config view
+ 2041  kubectl -n lfs158 create deployment nginx --image=nginx:alpine
+ 2042  kubectl get ns
+ 2043  history | tail -n 50
+ 2044  kubectl create namespace lfs158
+ 2045  kubectl get ns
+ 2046  kubectl -n lfs158 create deployment nginx --image=nginx:alpine
+ 2047  kubectl --context=bob-context get pods
+ 2048  sudo nano role.yml
+ 2049  kubectl create -f role.yml
+ 2050  kubectl -n lfs158 get roles
+ 2051  sudo nano role-binding.yaml
+ 2052  kubectl create -f rolebinding.yaml
+ 2053  kubectl create -f role-binding.yaml
+ 2054  kubectl -n lfs158 get rolebindings
+ 2055  kubectl --context=bob-context get pods
+ 2056  history | tail -n 100 > cmd-k8-rbac.txt 
