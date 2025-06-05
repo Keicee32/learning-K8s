@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configmap-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: story-app
+  template:
+    metadata:
+      labels:
+        app: story-app
+    spec:
+      containers:
+        - name: story-app
+          image: hello-world
+          envFrom:
+            - configMapRef:
+              name: full-config-map
+          env:
+            - name: SPECIFIC_ENV_VAR1
+              valueFrom:
+                configMapKeyRef:
+                  name: config-map-1
+                  key: SPECIFIC_DATA
+            - name: SPECIFIC_ENV_VAR2
+              valueFrom:
+                configMapKeyRef:
+                  name: config-map-2
+                  key: SPECIFIC_INFO
